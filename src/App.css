@@ -7,3 +7,14 @@ html {
 	-o-background-size: cover;
 	background-size: cover;
 }
+
+html,
+body,
+#root {
+	height: 100%;
+	margin: 0;
+}
+
+#root {
+	padding: 16px;
+}
