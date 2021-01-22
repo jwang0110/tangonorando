@@ -10,10 +10,7 @@ import "./App.css";
 const useStyles = makeStyles({
 	main: {
 		minHeight: "90%",
-		marginBottom: -10,
-	},
-	footer: {
-		height: 10,
+		marginBottom: "1rem",
 	},
 });
 
@@ -27,10 +24,12 @@ function App() {
 	const [database, setDatabase] = useState([""]);
 
 	const fetchData = async () => {
-		const response = await fetch("http://localhost:3001/phrases");
+		const response = await fetch("http://localhost:3001/expressions");
 		const data = await response.json();
 		setDatabase(data);
 	};
+
+	if (count === database.length) setCount(0);
 
 	return (
 		<>

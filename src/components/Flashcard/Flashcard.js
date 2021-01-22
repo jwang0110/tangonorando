@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles({
 	root: {
 		minWidth: 275,
-		padding: 16,
+		padding: "0.5rem",
 	},
 });
 
@@ -21,7 +21,7 @@ const FlashCard = ({ vocab, count, setCount }) => {
 	const [error, setError] = useState(false);
 
 	const checkAnswer = () => {
-		return answer === vocab["reading"];
+		return answer === vocab["romaji"][0];
 	};
 
 	const submitAnswer = () => {
@@ -59,7 +59,7 @@ const FlashCard = ({ vocab, count, setCount }) => {
 						align="center"
 						gutterBottom
 					>
-						{vocab["phrase"]}
+						{vocab["expression"]}
 					</Typography>
 				</CardContent>
 				<CardActions>
