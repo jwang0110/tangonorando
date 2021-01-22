@@ -24,7 +24,9 @@ function App() {
 	const [database, setDatabase] = useState([""]);
 
 	const fetchData = async () => {
-		const response = await fetch("http://localhost:3001/expressions");
+		const response = await fetch(
+			"https://secret-stream-52891.herokuapp.com/expressions"
+		);
 		const data = await response.json();
 		setDatabase(data);
 	};
