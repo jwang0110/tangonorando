@@ -16,10 +16,6 @@ const useStyles = makeStyles({
 });
 
 const FlashCard = ({ vocab, count, setCount }) => {
-	if (!vocab) {
-		return null;
-	}
-
 	const classes = useStyles();
 	const [answer, setAnswer] = useState("");
 	const [error, setError] = useState(false);

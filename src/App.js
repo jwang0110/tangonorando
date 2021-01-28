@@ -21,7 +21,7 @@ function App() {
 
 	const classes = useStyles();
 	const [count, setCount] = useState(0);
-	const [database, setDatabase] = useState(null);
+	const [database, setDatabase] = useState([""]);
 
 	const fetchData = async () => {
 		const response = await fetch(
