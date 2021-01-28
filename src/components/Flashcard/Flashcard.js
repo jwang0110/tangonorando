@@ -7,18 +7,33 @@ import CardContent from "@material-ui/core/CardContent";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import InfoModal from "../InfoModal/InfoModal";
 
 const useStyles = makeStyles({
 	root: {
 		minWidth: 275,
 		padding: "0.5rem",
 	},
+	cardContent: {
+		display: "flex",
+		flexDirection: "column",
+	},
 });
 
-const FlashCard = ({ vocab, count, setCount }) => {
+const FlashCard = ({ vocab, incrementCount }) => {
 	const classes = useStyles();
+	const [show, setShow] = useState(false);
 	const [answer, setAnswer] = useState("");
 	const [error, setError] = useState(false);
+
+	const handleShow = () => {
+		setShow(true);
+	};
+
+	const handleHide = () => {
+		console.log("hiding");
+		setShow(false);
+	};
 
 	const checkAnswer = () => {
 		return answer === vocab["romaji"][0];
@@ -26,7 +41,7 @@ const FlashCard = ({ vocab, count, setCount }) => {
 
 	const submitAnswer = () => {
 		if (checkAnswer()) {
-			setCount(count + 1);
+			incrementCount();
 			setAnswer("");
 		} else {
 			setError(true);
@@ -50,17 +65,16 @@ const FlashCard = ({ vocab, count, setCount }) => {
 	};
 
 	return (
-		<Container component="main" maxWidth="xs">
+		<Container maxWidth="xs">
 			<Card className={classes.root}>
-				<CardContent>
-					<Typography
-						variant="h1"
-						component="h2"
-						align="center"
-						gutterBottom
-					>
+				<CardContent className={classes.cardContent}>
+					<Typography variant="h1" component="h2" align="center">
 						{vocab["expression"]}
 					</Typography>
+					<Button variant="text" size="small" onClick={handleShow}>
+						Show More
+					</Button>
+					<InfoModal open={show} onClose={handleHide} vocab={vocab} />
 				</CardContent>
 				<CardActions>
 					<TextField

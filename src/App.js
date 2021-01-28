@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Title from "./components/Title/Title";
 import Flashcard from "./components/Flashcard/Flashcard";
+import Loading from "./components/Loading/Loading";
 import Copyright from "./components/Copyright/Copyright";
 import "./App.css";
 
@@ -21,7 +22,7 @@ function App() {
 
 	const classes = useStyles();
 	const [count, setCount] = useState(0);
-	const [database, setDatabase] = useState([""]);
+	const [database, setDatabase] = useState(null);
 
 	const fetchData = async () => {
 		const response = await fetch(
@@ -31,17 +32,22 @@ function App() {
 		setDatabase(data);
 	};
 
-	if (count === database.length) setCount(0);
+	const incrementCount = () => {
+		setCount(count + 1 !== database.length ? count + 1 : 0);
+	};
 
 	return (
 		<>
 			<Container className={classes.main} component="main" maxWidth="md">
 				<Title />
-				<Flashcard
-					vocab={database[count]}
-					count={count}
-					setCount={setCount}
-				/>
+				{!database ? (
+					<Loading />
+				) : (
+					<Flashcard
+						vocab={database[count]}
+						incrementCount={incrementCount}
+					/>
+				)}
 			</Container>
 			<Container
 				className={classes.footer}
