@@ -16,23 +16,31 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+const convertToString = (str) => {
+	return `"${str}"`;
+};
+
 const InfoModal = ({ open, onClose, vocab }) => {
 	const classes = useStyles();
-	let { expression, kana, romaji, meaning } = vocab;
+
+	const expression = convertToString(vocab["expression"]);
+	const kana = vocab["kana"].map((x) => convertToString(x)).join(", ");
+	const romaji = vocab["romaji"].map((x) => convertToString(x)).join(", ");
+	const meaning = vocab["meaning"].map((x) => convertToString(x)).join(", ");
 
 	return (
 		<Modal open={open} onClose={onClose}>
 			<div className={classes.root}>
-				<Typography>
+				<Typography gutterBottom>
 					<strong>Expression:</strong> {expression}
 				</Typography>
-				<Typography>
+				<Typography gutterBottom>
 					<strong>Kana:</strong> {kana}
 				</Typography>
-				<Typography>
+				<Typography gutterBottom>
 					<strong>Romaji:</strong> {romaji}
 				</Typography>
-				<Typography>
+				<Typography gutterBottom>
 					<strong>Meaning:</strong> {meaning}
 				</Typography>
 			</div>

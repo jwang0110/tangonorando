@@ -4,9 +4,9 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
-	center: {
+	root: {
 		display: "flex",
-		justifyContent: "center",
+		flexDirection: "column",
 		alignItems: "center",
 	},
 });
@@ -15,13 +15,11 @@ const Loading = () => {
 	const classes = useStyles();
 
 	return (
-		<Container maxWidth="xs">
+		<Container className={classes.root} maxWidth="xs">
 			<Typography align="center" gutterBottom>
 				Fetching database...
 			</Typography>
-			<div className={classes.center}>
-				<CircularProgress />
-			</div>
+			<CircularProgress />
 		</Container>
 	);
 };
