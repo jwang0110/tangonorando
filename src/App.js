@@ -21,11 +21,11 @@ function App() {
 
 	const classes = useStyles();
 	const [count, setCount] = useState(0);
-	const [database, setDatabase] = useState([""]);
+	const [database, setDatabase] = useState(null);
 
 	const fetchData = async () => {
 		const response = await fetch(
-			"https://secret-stream-52891.herokuapp.com/expressions"
+			"https://secret-stream-52891.herokuapp.com/expressions/0"
 		);
 		const data = await response.json();
 		setDatabase(data);
