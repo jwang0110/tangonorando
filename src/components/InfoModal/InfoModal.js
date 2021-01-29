@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		width: 400,
+		width: 300,
 		backgroundColor: theme.palette.background.paper,
 		border: "2px solid #000",
 		boxShadow: theme.shadows[5],

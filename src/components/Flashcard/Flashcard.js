@@ -7,40 +7,45 @@ import CardContent from "@material-ui/core/CardContent";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import SelectMenu from "../SelectMenu/SelectMenu";
 import InfoModal from "../InfoModal/InfoModal";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
 	root: {
-		minWidth: 275,
-		padding: "0.5rem",
+		minWidth: 250,
+		padding: theme.spacing(1),
 	},
 	cardContent: {
 		display: "flex",
 		flexDirection: "column",
 	},
-});
+	submit: {
+		marginTop: theme.spacing(2),
+	},
+}));
 
 const FlashCard = ({ vocab, incrementCount }) => {
 	const classes = useStyles();
 	const [show, setShow] = useState(false);
+	const [answerType, setAnswerType] = useState("romaji");
 	const [answer, setAnswer] = useState("");
 	const [error, setError] = useState(false);
 
-	const handleShow = () => {
+	const handleShowInfo = () => {
 		setShow(true);
 	};
 
-	const handleHide = () => {
-		console.log("hiding");
+	const handleHideInfo = () => {
 		setShow(false);
 	};
 
 	const checkAnswer = () => {
-		return answer === vocab["romaji"][0];
+		return vocab[answerType].includes(answer);
 	};
 
 	const submitAnswer = () => {
 		if (checkAnswer()) {
+			setError(false);
 			incrementCount();
 			setAnswer("");
 		} else {
@@ -68,15 +73,31 @@ const FlashCard = ({ vocab, incrementCount }) => {
 		<Container maxWidth="xs">
 			<Card className={classes.root}>
 				<CardContent className={classes.cardContent}>
-					<Typography variant="h1" component="h2" align="center">
+					<Typography
+						variant="h2"
+						align="center"
+						title={vocab["meaning"]}
+					>
 						{vocab["expression"]}
 					</Typography>
-					<Button variant="text" size="small" onClick={handleShow}>
+					<Button
+						variant="text"
+						size="small"
+						onClick={handleShowInfo}
+					>
 						Show More
 					</Button>
-					<InfoModal open={show} onClose={handleHide} vocab={vocab} />
+					<InfoModal
+						open={show}
+						onClose={handleHideInfo}
+						vocab={vocab}
+					/>
 				</CardContent>
 				<CardActions>
+					<SelectMenu
+						answerType={answerType}
+						setAnswerType={setAnswerType}
+					/>
 					<TextField
 						id="answer"
 						label="Answer"
@@ -86,7 +107,11 @@ const FlashCard = ({ vocab, incrementCount }) => {
 						onChange={onInputChange}
 						onKeyPress={onEnterKey}
 					/>
-					<Button size="small" onClick={onSubmitButton}>
+					<Button
+						className={classes.submit}
+						size="small"
+						onClick={onSubmitButton}
+					>
 						Submit
 					</Button>
 				</CardActions>
