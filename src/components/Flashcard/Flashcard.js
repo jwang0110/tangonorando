@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const FlashCard = ({ vocab, incrementCount }) => {
+const FlashCard = ({ vocab, incrementCount, resetCount }) => {
 	const classes = useStyles();
 	const [show, setShow] = useState(false);
 	const [answerType, setAnswerType] = useState("romaji");
@@ -50,6 +50,8 @@ const FlashCard = ({ vocab, incrementCount }) => {
 			setAnswer("");
 		} else {
 			setError(true);
+			resetCount();
+			setAnswer("");
 		}
 	};
 

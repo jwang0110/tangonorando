@@ -36,6 +36,10 @@ function App() {
 		setCount(count + 1 !== database.length ? count + 1 : 0);
 	};
 
+	const resetCount = () => {
+		setCount(0);
+	};
+
 	return (
 		<>
 			<Container className={classes.main} component="main" maxWidth="md">
@@ -46,6 +50,7 @@ function App() {
 					<Flashcard
 						vocab={database[count]}
 						incrementCount={incrementCount}
+						resetCount={resetCount}
 					/>
 				)}
 			</Container>
