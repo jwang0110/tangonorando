@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	subtitle: {
+		width: "100%",
 		[theme.breakpoints.down("sm")]: {
 			fontSize: "0.8rem",
 		},

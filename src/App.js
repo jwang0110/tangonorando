@@ -2,18 +2,22 @@ import { useState, useEffect } from "react";
 import "fontsource-roboto";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Button from "@material-ui/core/Button";
 import Title from "./components/Title/Title";
 import Flashcard from "./components/Flashcard/Flashcard";
 import Loading from "./components/Loading/Loading";
 import Copyright from "./components/Copyright/Copyright";
 import "./App.css";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
 	main: {
 		minHeight: "90%",
-		marginBottom: "1rem",
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+		marginBottom: theme.spacing(2),
 	},
-});
+}));
 
 function App() {
 	useEffect(() => {
@@ -50,9 +54,15 @@ function App() {
 					<Flashcard
 						vocab={database[count]}
 						incrementCount={incrementCount}
-						resetCount={resetCount}
 					/>
 				)}
+				<Button
+					variant="contained"
+					color="primary"
+					onClick={resetCount}
+				>
+					Reset
+				</Button>
 			</Container>
 			<Container
 				className={classes.footer}

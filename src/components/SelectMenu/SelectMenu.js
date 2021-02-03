@@ -22,6 +22,7 @@ const SelectMenu = ({ answerType, setAnswerType }) => {
 			<Select id="select-menu" value={answerType} onChange={handleChange}>
 				<MenuItem value={"romaji"}>Romaji</MenuItem>
 				<MenuItem value={"kana"}>Kana</MenuItem>
+				<MenuItem value={"expression"}>Kanji</MenuItem>
 			</Select>
 		</FormControl>
 	);

@@ -6,7 +6,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import Question from "../Question/Question";
 import SelectMenu from "../SelectMenu/SelectMenu";
 import InfoModal from "../InfoModal/InfoModal";
 
@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		minWidth: 250,
 		padding: theme.spacing(1),
+		marginBottom: theme.spacing(2),
 	},
 	cardContent: {
 		display: "flex",
@@ -24,9 +25,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const FlashCard = ({ vocab, incrementCount, resetCount }) => {
+const FlashCard = ({ vocab, incrementCount }) => {
 	const classes = useStyles();
 	const [show, setShow] = useState(false);
+	const [questionType, setQuestionType] = useState("expression");
 	const [answerType, setAnswerType] = useState("romaji");
 	const [answer, setAnswer] = useState("");
 	const [error, setError] = useState(false);
@@ -50,8 +52,6 @@ const FlashCard = ({ vocab, incrementCount, resetCount }) => {
 			setAnswer("");
 		} else {
 			setError(true);
-			resetCount();
-			setAnswer("");
 		}
 	};
 
@@ -75,13 +75,11 @@ const FlashCard = ({ vocab, incrementCount, resetCount }) => {
 		<Container maxWidth="xs">
 			<Card className={classes.root}>
 				<CardContent className={classes.cardContent}>
-					<Typography
-						variant="h2"
-						align="center"
-						title={vocab["meaning"]}
-					>
-						{vocab["expression"]}
-					</Typography>
+					<Question
+						vocab={vocab}
+						questionType={questionType}
+						setQuestionType={setQuestionType}
+					/>
 					<Button
 						variant="text"
 						size="small"
