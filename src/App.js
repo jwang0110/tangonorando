@@ -30,7 +30,7 @@ function App() {
 
 	const fetchData = async () => {
 		const response = await fetch(
-			"https://secret-stream-52891.herokuapp.com/database"
+			"https://tangoland-api.herokuapp.com/database"
 		);
 		const data = await response.json();
 		setDatabase(data);
